@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import {motion} from 'framer-motion';
 
 import InputField from "../components/InputField";
 import GenderCheckbox from "../components/GenderCheckbox";
@@ -34,7 +35,12 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="w-full h-full items-center justify-center">
+    <motion.div 
+      className="w-full h-full items-center justify-center"
+      initial={{opacity: 0, y:20}}
+      animate={{opacity: 1, y: 0}}
+      transition={{duration: 0.5}}
+    >
       <div className="w-full max-w-md h-full mx-auto flex items-center">
         <div className="h-fit w-full bg-white-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-30 border border-gray-100 p-6">
           <h1 className="text-3xl font-medium text-white text-center">
@@ -102,7 +108,7 @@ const SignupPage = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
