@@ -21,12 +21,14 @@ const protectRoute = async(req: Request, res: Response, next: NextFunction) => {
     try {
         const token = req.cookies.jwt;
         if(!token){
-            return res.status(401).json({error: "Unaothorized - no token provided"});
+            res.status(401).json({error: "Unaothorized - no token provided"});
+            return;
         };
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET!) as DecodedToken;
         if(!decoded){
-            return res.status(401).json({error: "Unaothorized - Invalid token"})
+            res.status(401).json({error: "Unaothorized - Invalid token"})
+            return;
         };
 
         const user = await prisma.user.findUnique({
@@ -34,7 +36,8 @@ const protectRoute = async(req: Request, res: Response, next: NextFunction) => {
             select: {id: true, username: true, fullName: true, profilePic: true}
         });
         if(!user){
-            return res.status(404).json({error: "User not found"})
+            res.status(404).json({error: "User not found"})
+            return;
         };
 
         req.user = user;
