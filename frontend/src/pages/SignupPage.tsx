@@ -5,8 +5,16 @@ import {motion} from 'framer-motion';
 import InputField from "../components/InputField";
 import GenderCheckbox from "../components/GenderCheckbox";
 
+interface SignupFormData {
+  fullName: string
+  username: string
+  password: string
+  confirmPassword: string
+  gender: string
+}
+
 const SignupPage = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<SignupFormData>({
     fullName: "",
     username: "",
     password: "",
