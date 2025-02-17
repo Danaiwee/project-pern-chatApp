@@ -28,7 +28,7 @@ const SignupPage = () => {
     })
   };
 
-  const handleFormSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     console.log(formData);
