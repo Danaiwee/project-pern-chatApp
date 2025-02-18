@@ -1,9 +1,11 @@
+import useListenMessages from "../hooks/useGetListenMessages";
 import useGetMessages from "../hooks/useGetMessages";
 import Message from "./Message";
 import MessageSkeleton from "./MessageSkeletons";
 
 const Messages = () => {
   const {loading, messages} = useGetMessages();
+  useListenMessages();
 
   if(loading){
     return (
