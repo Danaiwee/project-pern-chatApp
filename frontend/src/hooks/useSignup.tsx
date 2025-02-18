@@ -30,7 +30,7 @@ const useSignup = () => {
             if(!res.ok) throw new Error(data.error);
 
             setAuthUser(data); 
-
+            toast.success("Welcome! "+ data.fullName);
         } catch (error: any) {
             console.error(error.message);
             toast.error(error.message);

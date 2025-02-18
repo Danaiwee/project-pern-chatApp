@@ -28,6 +28,7 @@ const useLogin = () => {
             if(!res.ok) throw new Error(data.error);
 
             setAuthUser(data);
+            toast.success("Welcome! "+ data.fullName);
 
         } catch (error: any) {
             console.log(error.message);
