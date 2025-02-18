@@ -26,7 +26,7 @@ const MessageContainer = () => {
           </p>
         </div>
 
-        <div className="px-2 mt-1">
+        <div className="px-2 mt-1 mb-6">
           <Messages />
         </div>
 
