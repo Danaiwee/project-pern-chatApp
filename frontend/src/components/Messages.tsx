@@ -27,7 +27,10 @@ const Messages = () => {
   }
 
   return (
-    <div className='w-full h-full overflow-auto' ref={ref}>
+    <div 
+      className='w-full h-full overflow-y-auto' 
+      ref={ref}
+    >
      {messages.map((message) => (
       <Message 
         key={message.id}
