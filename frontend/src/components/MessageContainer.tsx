@@ -26,7 +26,7 @@ const MessageContainer = () => {
           </p>
         </div>
 
-        <div className="px-2 mt-1 mb-6">
+        <div className="flex-1 px-2 mt-1 mb-6 overflow-y-auto">
           <Messages />
         </div>
 

@@ -1,3 +1,4 @@
+import useChatScroll from "../hooks/useChatScroll";
 import useListenMessages from "../hooks/useGetListenMessages";
 import useGetMessages from "../hooks/useGetMessages";
 import Message from "./Message";
@@ -6,6 +7,8 @@ import MessageSkeleton from "./MessageSkeletons";
 const Messages = () => {
   const {loading, messages} = useGetMessages();
   useListenMessages();
+
+  const ref = useChatScroll(messages) as React.RefObject<HTMLDivElement>;
 
   if(loading){
     return (
@@ -24,7 +27,7 @@ const Messages = () => {
   }
 
   return (
-    <div className='w-full h-full'>
+    <div className='w-full h-full overflow-auto' ref={ref}>
      {messages.map((message) => (
       <Message 
         key={message.id}
