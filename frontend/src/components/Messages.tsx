@@ -1,122 +1,35 @@
-import React from "react";
+import useGetMessages from "../hooks/useGetMessages";
+import Message from "./Message";
+import MessageSkeleton from "./MessageSkeletons";
 
 const Messages = () => {
-  return (
-    <>
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:45</time>
-        </div>
-      </div>
-      <div className="chat chat-end">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">I hate you!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:50</time>
-        </div>
-      </div>
+  const {loading, messages} = useGetMessages();
 
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:45</time>
-        </div>
+  if(loading){
+    return (
+      [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)
+    )
+  };
+
+  if(!loading && messages.length === 0){
+    return (
+      <div className='w-full h-100 flex items-center justify-center'>
+        <span className='text-white text-sm font-medium'>
+          No chat history!, please start chatting :)
+        </span>
       </div>
-      <div className="chat chat-end">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">I hate you!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:50</time>
-        </div>
-      </div>
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:45</time>
-        </div>
-      </div>
-      <div className="chat chat-end">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">I hate you!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:50</time>
-        </div>
-      </div>
-      <div className="chat chat-start">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">You were the Chosen One!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:45</time>
-        </div>
-      </div>
-      <div className="chat chat-end">
-        <div className="chat-image avatar">
-          <div className="w-10 rounded-full">
-            <img
-              alt="Tailwind CSS chat bubble component"
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-            />
-          </div>
-        </div>
-        <div className="chat-bubble">I hate you!</div>
-        <div className="chat-footer opacity-50">
-          <time className="text-xs text-white font-bold mt-1">12:50</time>
-        </div>
-      </div>
-    </>
+    )
+  }
+
+  return (
+    <div className='w-full h-full'>
+     {messages.map((message) => (
+      <Message 
+        key={message.id}
+        message={message}
+      />
+     ))}
+    </div>
   );
 };
 

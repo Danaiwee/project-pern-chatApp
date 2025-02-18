@@ -18,7 +18,7 @@ const MessageContainer = () => {
 
   if (selectedConversation) {
     return (
-      <div className="relative w-full flex flex-col overflow-auto mb-5">
+      <div className="relative w-full h-full flex flex-col overflow-auto mb-5">
         <div className="sticky flex items-center top-0 w-full bg-slate-500 py-1 px-4 z-20">
           <p className="text-xs text-white">To:&nbsp;&nbsp;</p>
           <p className="text-sm text-gray-900 font-medium">
@@ -26,11 +26,11 @@ const MessageContainer = () => {
           </p>
         </div>
 
-        <div className="px-2">
+        <div className="px-2 mt-1">
           <Messages />
         </div>
 
-        <div className="sticky bottom-0 px-2 w-full z-20">
+        <div className="fixed bottom-3 px-2 z-20 w-[60%] ">
           <MessageInput />
         </div>
       </div>

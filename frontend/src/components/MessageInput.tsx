@@ -1,25 +1,29 @@
 import { useState } from "react";
 import { Send } from 'lucide-react';
 import {motion} from 'framer-motion';
+import useSendMessage from "../hooks/useSendMessage";
 
 const MessageInput = () => {
   const [message, setMessage] = useState("");
+
+  const {sendMessage, loading} = useSendMessage();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(message);
+    if(message.trim()) return
 
+    await sendMessage(message);
     setMessage('');
   };
   return (
     <form 
         onSubmit={handleSubmit}
-        className="w-full flex items-center gap-2"
+        className="max-w-full flex items-center gap-2"
     >
       <input
         type="text"
@@ -34,7 +38,12 @@ const MessageInput = () => {
         type='submit'
         className='bg-gray-900 p-2 rounded-full cursor-pointer'
       >
-        <Send className='size-5 text-white' />
+        {loading ? (
+          <span className='loading loading-spinner text-white' />
+        ) : (
+          <Send className='size-5 text-white' />
+
+        )}
       </motion.button>
     </form>
   );
