@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {motion} from 'framer-motion';
 
 import InputField from "../components/InputField";
+import useLogin from "../hooks/useLogin";
 
 interface LoginFormData{
   username: string
@@ -15,6 +16,8 @@ const LoginPage = () => {
     password: ''
   });
 
+  const {login, loading} = useLogin();
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -25,7 +28,7 @@ const LoginPage = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(formData)
+    login(formData)
   };
   return (
     <motion.div 
@@ -60,8 +63,11 @@ const LoginPage = () => {
                 onChange={handleInputChange}
               />
 
-              <button className='w-full py-2 rounded-lg bg-gray-900 text-white font-medium cursor-pointer mt-5'>
-                Sign In
+              <button 
+                className='w-full py-2 rounded-lg bg-gray-900 text-white font-medium cursor-pointer mt-5'
+                disabled={loading}
+              >
+                {loading ? "Signing in..." : "Sign in"}
             </button>
 
             <div className='flex items-center justify-center gap-1 mt-3'>
