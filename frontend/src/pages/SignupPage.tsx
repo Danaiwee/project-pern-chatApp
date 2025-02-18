@@ -4,6 +4,7 @@ import {motion} from 'framer-motion';
 
 import InputField from "../components/InputField";
 import GenderCheckbox from "../components/GenderCheckbox";
+import useSignup from "../hooks/useSignup";
 
 interface SignupFormData {
   fullName: string
@@ -22,6 +23,8 @@ const SignupPage = () => {
     gender: "",
   });
 
+  const {loading, signup} = useSignup();
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
       ...formData,
@@ -39,7 +42,7 @@ const SignupPage = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log(formData);
+    signup(formData);
   };
 
   return (
@@ -102,8 +105,11 @@ const SignupPage = () => {
 
             </div>
 
-            <button className='w-full py-2 rounded-lg bg-gray-900 text-white font-medium cursor-pointer'>
-                Sign Up
+            <button 
+              className='w-full py-2 rounded-lg bg-gray-900 text-white font-medium cursor-pointer'
+              disabled={loading}
+            >
+                {loading ? "Signing up..." : "Sign Up"}
             </button>
 
           </form>
